@@ -1,0 +1,29 @@
+#A script meant for Straight Line Depreciation
+
+def straight_line_depreciation_with_present_value(initial_value, salvage_value, useful_life):
+
+    initial_value = int(initial_value)
+    salvage_value = int(salvage_value)
+    useful_life = int(useful_life)
+
+    depreciation_schedule = []
+    depreciation_per_period = (initial_value - salvage_value) / useful_life
+    present_value = initial_value
+    
+    for period in range(1, useful_life + 1):
+        depreciation_amount = depreciation_per_period
+        present_value -= depreciation_amount
+        depreciation_schedule.append((period, depreciation_amount, present_value))
+    
+    return depreciation_schedule
+
+# Example usage:
+initial_value = input('What is the initial Value? ')
+salvage_value = input('What is the Salvage Value? ')
+useful_life = input('How many years of useful life does it have? ')       
+
+schedule = straight_line_depreciation_with_present_value(initial_value, salvage_value, useful_life)
+print("Straight-Line Depreciation Schedule with Present Value:")
+print("Period\tDepreciation Amount\tPresent Value")
+for period, amount, present_value in schedule:
+    print(f"{period}\t{amount}\t\t\t{present_value}")
