@@ -1,0 +1,13 @@
+def compound_interest(principal, rate, time, n):
+    # Formula for compound interest: A = P * (1 + r/n)^(nt)
+    amount = principal * (1 + rate / n) ** (n * time)
+    return amount
+
+
+principal = float(input("How much is the principal? "))
+rate = float(input("What is the rate? in decimal form "))
+time = int(input("How many years? "))
+n = int(input("How many times a year is it compounded? "))
+
+total_amount = compound_interest(principal, rate, time, n)
+print("Total amount after compound interest:", round(total_amount, 2))
