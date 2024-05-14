@@ -14,11 +14,20 @@ def double_declining_balance(cost, salvage_value, useful_life, year):
 def compound_interest(principal, rate, times_compounded, years):
     return principal * ((1 + rate / times_compounded) ** (times_compounded * years))
 
+def calculate_break_even_point(fixed_costs, variable_cost_per_unit, selling_price_per_unit):
+   
+    if variable_cost_per_unit >= selling_price_per_unit:
+        raise ValueError("Variable cost per unit must be less than the selling price per unit.")
+    
+    break_even_point = fixed_costs / (selling_price_per_unit - variable_cost_per_unit)
+    return break_even_point
+
 def main():
     print("Choose a function to run:")
     print("1. Straight Line Depreciation")
     print("2. Double Declining Balance")
     print("3. Compound Interest")
+    print("4. Break Even Point")
     
     choice = input("Enter the number of your choice: ")
     
@@ -44,7 +53,15 @@ def main():
         years = float(input("Enter the number of years the money is invested for: "))
         result = compound_interest(principal, rate, times_compounded, years)
         print(f"Compound Interest: {result}")
-        
+
+    elif choice == '4':
+        fixed_costs = float(input("Enter the total fixed costs: "))
+        variable_cost_per_unit = float(input("Enter the variable cost per unit: "))
+        selling_price_per_unit = float(input("Enter the selling price per unit: "))
+
+        break_even_units = calculate_break_even_point(fixed_costs, variable_cost_per_unit, selling_price_per_unit)
+        print(f"The break-even point is {break_even_units:.2f} units.")
+    
     else:
         print("Invalid choice. Please run the program again and select a valid option.")
 
