@@ -1,0 +1,17 @@
+def calculate_break_even_point(fixed_costs, variable_cost_per_unit, selling_price_per_unit):
+   
+    if variable_cost_per_unit >= selling_price_per_unit:
+        raise ValueError("Variable cost per unit must be less than the selling price per unit.")
+    
+    break_even_point = fixed_costs / (selling_price_per_unit - variable_cost_per_unit)
+    return break_even_point
+
+try:
+    fixed_costs = float(input("Enter the total fixed costs: "))
+    variable_cost_per_unit = float(input("Enter the variable cost per unit: "))
+    selling_price_per_unit = float(input("Enter the selling price per unit: "))
+
+    break_even_units = calculate_break_even_point(fixed_costs, variable_cost_per_unit, selling_price_per_unit)
+    print(f"The break-even point is {break_even_units:.2f} units.")
+except ValueError as e:
+    print(f"Invalid input: {e}")
