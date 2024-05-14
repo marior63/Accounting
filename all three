@@ -1,0 +1,52 @@
+#Has all 3 functions together and runs one based on user choice
+
+def straight_line_depreciation(cost, salvage_value, useful_life):
+    return (cost - salvage_value) / useful_life
+
+def double_declining_balance(cost, salvage_value, useful_life, year):
+    rate = (2 / useful_life) * 100
+    depreciation = cost * (rate / 100)
+    for i in range(1, year):
+        cost -= depreciation
+        depreciation = cost * (rate / 100)
+    return depreciation
+
+def compound_interest(principal, rate, times_compounded, years):
+    return principal * ((1 + rate / times_compounded) ** (times_compounded * years))
+
+def main():
+    print("Choose a function to run:")
+    print("1. Straight Line Depreciation")
+    print("2. Double Declining Balance")
+    print("3. Compound Interest")
+    
+    choice = input("Enter the number of your choice: ")
+    
+    if choice == '1':
+        cost = float(input("Enter the cost of the asset: "))
+        salvage_value = float(input("Enter the salvage value of the asset: "))
+        useful_life = float(input("Enter the useful life of the asset (in years): "))
+        result = straight_line_depreciation(cost, salvage_value, useful_life)
+        print(f"Straight Line Depreciation: {result}")
+        
+    elif choice == '2':
+        cost = float(input("Enter the cost of the asset: "))
+        salvage_value = float(input("Enter the salvage value of the asset: "))
+        useful_life = float(input("Enter the useful life of the asset (in years): "))
+        year = int(input("Enter the year for which you want the depreciation value: "))
+        result = double_declining_balance(cost, salvage_value, useful_life, year)
+        print(f"Double Declining Balance Depreciation for year {year}: {result}")
+        
+    elif choice == '3':
+        principal = float(input("Enter the principal amount: "))
+        rate = float(input("Enter the annual interest rate (as a decimal): "))
+        times_compounded = int(input("Enter the number of times interest is compounded per year: "))
+        years = float(input("Enter the number of years the money is invested for: "))
+        result = compound_interest(principal, rate, times_compounded, years)
+        print(f"Compound Interest: {result}")
+        
+    else:
+        print("Invalid choice. Please run the program again and select a valid option.")
+
+if __name__ == "__main__":
+    main()
