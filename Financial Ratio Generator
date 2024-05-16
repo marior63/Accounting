@@ -1,0 +1,59 @@
+class FinancialRatiosAnalyzer:
+    def __init__(self, current_assets, current_liabilities, inventory, total_liabilities, total_equity, total_debt, total_assets):
+        self.current_assets = current_assets
+        self.current_liabilities = current_liabilities
+        self.inventory = inventory
+        self.total_liabilities = total_liabilities
+        self.total_equity = total_equity
+        self.total_debt = total_debt
+        self.total_assets = total_assets
+
+    def current_ratio(self):
+        try:
+            return self.current_assets / self.current_liabilities
+        except ZeroDivisionError:
+            return "Current liabilities cannot be zero."
+
+    def quick_ratio(self):
+        try:
+            return (self.current_assets - self.inventory) / self.current_liabilities
+        except ZeroDivisionError:
+            return "Current liabilities cannot be zero."
+
+    def debt_to_equity_ratio(self):
+        try:
+            return self.total_liabilities / self.total_equity
+        except ZeroDivisionError:
+            return "Total equity cannot be zero."
+
+    def debt_ratio(self):
+        try:
+            return self.total_debt / self.total_assets
+        except ZeroDivisionError:
+            return "Total assets cannot be zero."
+
+    def equity_ratio(self):
+        try:
+            return self.total_equity / self.total_assets
+        except ZeroDivisionError:
+            return "Total assets cannot be zero."
+
+    def print_ratios(self):
+        print(f"Current Ratio: {self.current_ratio()}")
+        print(f"Quick Ratio: {self.quick_ratio()}")
+        print(f"Debt-to-Equity Ratio: {self.debt_to_equity_ratio()}")
+        print(f"Debt Ratio: {self.debt_ratio()}")
+        print(f"Equity Ratio: {self.equity_ratio()}")
+
+
+if __name__ == "__main__":
+    current_assets = float(input("Enter current assets: "))
+    current_liabilities = float(input("Enter current liabilities: "))
+    inventory = float(input("Enter inventory: "))
+    total_liabilities = float(input("Enter total liabilities: "))
+    total_equity = float(input("Enter total equity: "))
+    total_debt = float(input("Enter total debt: "))
+    total_assets = float(input("Enter total assets: "))
+
+    analyzer = FinancialRatiosAnalyzer(current_assets, current_liabilities, inventory, total_liabilities, total_equity, total_debt, total_assets)
+    analyzer.print_ratios()
