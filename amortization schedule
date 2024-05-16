@@ -1,0 +1,45 @@
+import pandas as pd
+
+def calculate_amortization_schedule(principal, annual_interest_rate, years, payments_per_year):
+
+    monthly_interest_rate = annual_interest_rate / payments_per_year / 100
+    
+    total_payments = years * payments_per_year
+    
+    monthly_payment = principal * (monthly_interest_rate * (1 + monthly_interest_rate) ** total_payments) / ((1 + monthly_interest_rate) ** total_payments - 1)
+    
+    remaining_balance = principal
+    
+    schedule = []
+    
+    for payment_number in range(1, total_payments + 1):
+        interest_payment = remaining_balance * monthly_interest_rate
+        
+        principal_payment = monthly_payment - interest_payment
+        
+        remaining_balance -= principal_payment
+        
+        schedule.append({
+            'Payment Number': payment_number,
+            'Monthly Payment': round(monthly_payment, 2),
+            'Principal Payment': round(principal_payment, 2),
+            'Interest Payment': round(interest_payment, 2),
+            'Remaining Balance': round(remaining_balance, 2)
+        })
+    
+    df = pd.DataFrame(schedule)
+    
+    return df
+
+def main():
+    principal = float(input("Enter the loan amount: "))
+    annual_interest_rate = float(input("Enter the annual interest rate (in %): "))
+    years = int(input("Enter the loan term (in years): "))
+    payments_per_year = int(input("Enter the number of payments per year: "))
+    
+    amortization_schedule = calculate_amortization_schedule(principal, annual_interest_rate, years, payments_per_year)
+    
+    print(amortization_schedule)
+
+if __name__ == "__main__":
+    main()
